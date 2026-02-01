@@ -376,6 +376,7 @@
       <div id="users" class="tab-content hidden">
         <h1 class="text-2xl font-bold mb-4">Users</h1>
         <button id="addUserBtn" class="mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">Add New Employees</button>
+
         <div class="overflow-x-auto">
           <table class="w-full border-collapse border border-gray-200">
             <thead>
@@ -393,6 +394,7 @@
           </table>
         </div>
       </div>
+
       <script>
         // بيانات المستخدمين الأولية
         let users = [
@@ -400,7 +402,7 @@
           { id: 2, name: "Ali Hassan", email: "ali@example.com", role: "User" },
           { id: 3, name: "Sara Mohamed", email: "sara@example.com", role: "Moderator" }
         ];
-      
+
         // دالة عرض المستخدمين
         function renderUsers() {
           const tbody = document.querySelector("#users tbody");
@@ -414,7 +416,13 @@
               <td class="p-3 border">${user.id}</td>
               <td class="p-3 border">${user.name}</td>
               <td class="p-3 border">${user.email}</td>
-              <td class="p-3 border">${user.role}</td>
+              <td class="p-3 border">
+                <select class="border rounded px-2 py-1 text-sm" data-id="${user.id}">
+                  <option ${user.role === "Admin" ? "selected" : ""}>Admin</option>
+                  <option ${user.role === "User" ? "selected" : ""}>User</option>
+                  <option ${user.role === "Moderator" ? "selected" : ""}>Moderator</option>
+                </select>
+              </td>
               <td class="p-3 border flex gap-2">
                 <button class="edit-btn px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition" data-id="${user.id}">Edit</button>
                 <button class="delete-btn px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition" data-id="${user.id}">Delete</button>
@@ -423,7 +431,7 @@
             tbody.appendChild(tr);
           });
         
-          // ربط أزرار Edit و Delete بعد كل render
+          // أزرار Delete
           document.querySelectorAll(".delete-btn").forEach(btn => {
             btn.addEventListener("click", () => {
               const id = parseInt(btn.dataset.id);
@@ -432,6 +440,7 @@
             });
           });
         
+          // أزرار Edit
           document.querySelectorAll(".edit-btn").forEach(btn => {
             btn.addEventListener("click", () => {
               const id = parseInt(btn.dataset.id);
@@ -439,14 +448,21 @@
             
               const newName = prompt("Edit Name:", user.name);
               const newEmail = prompt("Edit Email:", user.email);
-              const newRole = prompt("Edit Role:", user.role);
             
-              if (newName && newEmail && newRole) {
+              if(newName && newEmail){
                 user.name = newName;
                 user.email = newEmail;
-                user.role = newRole;
                 renderUsers();
               }
+            });
+          });
+        
+          // تغيير Role من select
+          document.querySelectorAll("#users select").forEach(select => {
+            select.addEventListener("change", () => {
+              const id = parseInt(select.dataset.id);
+              const user = users.find(u => u.id === id);
+              user.role = select.value;
             });
           });
         }
@@ -456,10 +472,13 @@
         addUserBtn.addEventListener("click", () => {
           const name = prompt("Enter Name:");
           const email = prompt("Enter Email:");
-          const role = prompt("Enter Role:");
         
-          if(name && email && role){
-            const newId = users.length ? users[users.length-1].id + 1 : 1;
+          if(!name || !email) return;
+        
+          const role = prompt("Enter Role (Admin / User / Moderator):", "User");
+        
+          if(role){
+            const newId = users.length ? users[users.length - 1].id + 1 : 1;
             users.push({ id: newId, name, email, role });
             renderUsers();
           }
@@ -468,6 +487,7 @@
         // عرض المستخدمين عند تحميل الصفحة
         renderUsers();
       </script>
+
       <!-- <div id="inbox" class="tab-content hidden">
         <h1 class="text-2xl font-bold mb-4  mt-10">Inbox</h1>
         <button id="addMsgBtn" class="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Add New Message</button>
