@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+    <!-- زرار فتح/اغلاق الـ Sidebar (يظهر على الموبايل فقط) -->
+    <button id="sidebarToggle" class="sm:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-white shadow-md">
+      <i class="fas fa-bars text-xl"></i>
+    </button>
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed top-0 left-0 z-40 w-64 h-full bg-white border-r border-gray-200 transform -translate-x-full transition-transform duration-300 ease-in-out sm:translate-x-0">
+      <div class="h-full flex flex-col overflow-y-auto p-4">
+        <h2 class="text-xl font-bold mb-6">Dashboard</h2>
+
+        <ul class="space-y-2 flex-1">
+          <li>
+            <a href="#" data-tab="home" class="flex items-center px-2 py-2 rounded hover:bg-gray-200">
+              <i class="fas fa-home w-5"></i>
+              <span class="ml-3">Home</span>
+            </a>
+          </li>
+          <li>
+            <!-- Dropdown -->
+            <button class="flex items-center justify-between w-full px-2 py-2 rounded hover:bg-gray-200" id="ecomBtn">
+              <span class="flex items-center">
+                <i class="fas fa-shopping-cart w-5"></i>
+                <span class="ml-3">E-commerce</span>
+              </span>
+              <i class="fas fa-chevron-down transition-transform" id="dropdownIcon"></i>
+            </button>
+            <ul id="dropdownMenu" class="hidden pl-8 mt-1 space-y-1">
+              <li><a href="#" data-tab="products" class="block px-2 py-1 rounded hover:bg-gray-200">Products</a></li>
+              <li><a href="#" data-tab="billing" class="block px-2 py-1 rounded hover:bg-gray-200">Billing</a></li>
+              <li><a href="#" data-tab="invoice" class="block px-2 py-1 rounded hover:bg-gray-200">Invoice</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#" data-tab="users" class="flex items-center px-2 py-2 rounded hover:bg-gray-200">
+              <i class="fas fa-users w-5"></i>
+              <span class="ml-3">Users</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" data-tab="inbox" class="flex items-center px-2 py-2 rounded hover:bg-gray-200">
+              <i class="fas fa-inbox w-5"></i>
+              <span class="ml-3">Inbox</span>
+              <span class="ml-auto text-xs bg-red-100 text-red-700 px-2 rounded-full">2</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" data-tab="signin" class="flex items-center px-2 py-2 rounded hover:bg-gray-200">
+              <i class="fas fa-sign-in-alt w-5"></i>
+              <span class="ml-3">Sign In</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="mt-auto">
+          <a href="#" data-tab="support" class="flex items-center px-2 py-2 rounded hover:bg-gray-200">
+            <i class="fas fa-question-circle w-5"></i>
+            <span class="ml-3">Support</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- محتوى الصفحة -->
+    <div class="sm:ml-64 p-4 transition-all duration-300">
+      <div id="home" class="tab-content">
+        <h1 class="text-3xl font-bold mb-4">Welcome to Home</h1>
+        <div>
+            <div>
+                <form class="max-w-md mx-auto">   
+                  <label for="search" class="block mb-2.5 text-sm font-medium text-heading sr-only ">Search</label>
+                  <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                          <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/></svg>
+                      </div>
+                      <input type="search" id="search" class="block w-full p-3 ps-9 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body " placeholder="Search" required />
+                      <button type="button" class="absolute end-1.5 bottom-1.5 text-white bg-blue-500 hover:bg-blue-600 box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-xs px-3 py-1.5 focus:outline-none">Search</button>
+                  </div>
+                </form>
+                <div class="mt-10 p-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  <a href="#" class="bg-white rounded-lg shadow-md p-4 flex flex-col items-center justify-center hover:shadow-xl hover:bg-gray-100 cursor-pointer">
+                      <i class="fas fa-user text-4xl text-blue-500 mb-2"></i>
+                      <h3 class="text-lg font-bold mb-1">Users</h3>
+                      <p class="text-gray-500">عدد المستخدمين: 120</p>
+                  </a>
+                  <a href="#" class="bg-white rounded-lg shadow-md p-4 flex flex-col items-center justify-center hover:shadow-xl hover:bg-gray-100 cursor-pointer">
+                      <i class="fas fa-shopping-cart text-4xl text-green-500 mb-2"></i>
+                      <h3 class="text-lg font-bold mb-1">Orders</h3>
+                      <p class="text-gray-500">عدد الطلبات: 80</p>
+                  </a>
+                  <a href="#" class="bg-white rounded-lg shadow-md p-4 flex flex-col items-center justify-center hover:shadow-xl hover:bg-gray-100 cursor-pointer">
+                      <i class="fas fa-envelope text-4xl text-red-500 mb-2"></i>
+                      <h3 class="text-lg font-bold mb-1">Inbox</h3>
+                      <p class="text-gray-500">رسائل جديدة: 5</p>
+                  </a>
+                  <a href="#" class="bg-white rounded-lg shadow-md p-4 flex flex-col items-center justify-center hover:shadow-xl hover:bg-gray-100 cursor-pointer">
+                      <i class="fas fa-chart-line text-4xl"></i>
+                      <h3 class="text-lg font-bold">Analytics</h3>
+                      <p class="text-gray-500">أداء الموقع: 75</p>
+                  </a>
+                </div>
+                <div class="max-w-xl mx-auto mt-10 p-4 bg-white rounded-xl shadow-md">
+                  <h2 class="text-xl font-bold mb-4 text-center">مبيعات الشهر</h2>
+                  <canvas id="myChart"></canvas>
+                </div>
+              <!-- Chart.js CDN -->
+              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+              <script>
+                const ctx = document.getElementById('myChart').getContext('2d');
+                const myChart = new Chart(ctx, {
+                    type: 'bar', // نوع الرسم: bar, line, pie, doughnut ...
+                    data: {
+                        labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'], // أسماء الأقسام
+                        datasets: [{
+                            label: 'المبيعات',
+                            data: [12, 19, 3, 5, 2, 3], // البيانات
+                            backgroundColor: 'rgba(59, 130, 246, 0.7)', // لون الأعمدة
+                            borderColor: 'rgba(59, 130, 246, 1)', // لون الحدود
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true, // الريسبونسيف
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                            },
+                            tooltip: {
+                                enabled: true
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+              </script>
+            </div>
+        </div>
+      </div>
+
+      <div id="products" class="tab-content hidden">
+        <h1 class="text-3xl font-bold mb-4">Products</h1>
+        <div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+            <!-- كارد منتج -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+              <img src="images/images (1).jfif" alt="Product 1" class="w-full h-48 object-cover">
+              <div class="p-4">
+                <h3 class="text-lg font-bold mb-2">Skin Care</h3>
+                <p class="text-gray-600 mb-2">Lorem, ipsum dolor.</p>
+                <div class="flex items-center justify-between">
+                  <span class="font-semibold text-blue-600">250 جنيه</span>
+                  <button class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">شراء</button>
+                </div>
+              </div>
+            </div>
+            <!-- كارد منتج 2 -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+              <img src="images/images (2).jfif" alt="Product 2" class="w-full h-48 object-cover">
+              <div class="p-4">
+                <h3 class="text-lg font-bold mb-2">Skin Care</h3>
+                <p class="text-gray-600 mb-2">Lorem, ipsum dolor.</p>
+                <div class="flex items-center justify-between">
+                  <span class="font-semibold text-blue-600">180 $</span>
+                  <button class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">شراء</button>
+                </div>
+              </div>
+            </div>
+            <!-- كارد منتج 2 -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+              <img src="images/images.jfif" alt="Product 2" class="w-full h-48 object-cover">
+              <div class="p-4">
+                <h3 class="text-lg font-bold mb-2">Skin Care</h3>
+                <p class="text-gray-600 mb-2">Lorem, ipsum dolor.</p>
+                <div class="flex items-center justify-between">
+                  <span class="font-semibold text-blue-600">190 $</span>
+                  <button class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">شراء</button>
+                </div>
+              </div>
+            </div>
+            <!-- كارد منتج 2 -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+              <img src="images/images (3).jfif" alt="Product 2" class="w-full h-48 object-cover">
+              <div class="p-4">
+                <h3 class="text-lg font-bold mb-2">Skin Care</h3>
+                <p class="text-gray-600 mb-2">Lorem, ipsum dolor.</p>
+                <div class="flex items-center justify-between">
+                  <span class="font-semibold text-blue-600">150 $</span>
+                  <button class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">شراء</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="billing" class="tab-content hidden">
+        <h1 class="text-3xl font-bold mb-4">Billing</h1>
+        <div class="p-4 bg-white rounded-xl shadow-md mt-6">
+          <h2 class="text-xl font-bold mb-4">Billing</h2>
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-gray-100">
+                <th class="p-2 border">Invoice #</th>
+                <th class="p-2 border">Customer</th>
+                <th class="p-2 border">Date</th>
+                <th class="p-2 border">Amount</th>
+                <th class="p-2 border">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="hover:bg-gray-50">
+                <td class="p-2 border">001</td>
+                <td class="p-2 border">Mariam</td>
+                <td class="p-2 border">01-02-2026</td>
+                <td class="p-2 border">250 $</td>
+                <td class="p-2 border text-green-600 font-semibold">Paid</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="p-2 border">002</td>
+                <td class="p-2 border">Ahmed</td>
+                <td class="p-2 border">02-02-2026</td>
+                <td class="p-2 border">180 $</td>
+                <td class="p-2 border text-yellow-600 font-semibold">Pending</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="p-2 border">003</td>
+                <td class="p-2 border">rana</td>
+                <td class="p-2 border">02-07-2026</td>
+                <td class="p-2 border">160 $</td>
+                <td class="p-2 border text-yellow-600 font-semibold">Pending</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="invoice" class="tab-content hidden">
+        <h1 class="text-3xl font-bold mb-4">Invoice</h1>
+        <div>
+          <!-- Container رئيسية -->
+          <div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+              <div>
+                <!-- Header الفاتورة -->
+                <h2 class="text-xl font-semibold text-gray-700">Invoice #00123</h2>
+                <p class="text-gray-500">Issue Date: 2026-02-01</p>
+                <p class="text-gray-500">Due Date: 2026-02-15</p>
+              </div>
+              <div class="mt-4 sm:mt-0 text-left sm:text-right">
+                <h2 class="text-xl font-semibold text-gray-700">Customer</h2>
+                <p class="text-gray-500">Maryam Al-Safty</p>
+                <p class="text-gray-500">mariam@example.com</p>
+              </div>
+            </div>
+            <!-- جدول المنتجات -->
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border border-gray-200 rounded-lg">
+                <thead class="bg-gray-100">
+                  <tr>
+                    <th class="p-3 border-b">Product</th>
+                    <th class="p-3 border-b">Quantity</th>
+                    <th class="p-3 border-b">Unit Price</th>
+                    <th class="p-3 border-b">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="hover:bg-gray-50 transition">
+                    <td class="p-3 border-b">Product A</td>
+                    <td class="p-3 border-b">2</td>
+                    <td class="p-3 border-b">$50</td>
+                    <td class="p-3 border-b">$100</td>
+                  </tr>
+                  <tr class="hover:bg-gray-50 transition">
+                    <td class="p-3 border-b">Product B</td>
+                    <td class="p-3 border-b">1</td>
+                    <td class="p-3 border-b">$75</td>
+                    <td class="p-3 border-b">$75</td>
+                  </tr>
+                  <tr class="hover:bg-gray-50 transition">
+                    <td class="p-3 border-b">Product C</td>
+                    <td class="p-3 border-b">3</td>
+                    <td class="p-3 border-b">$30</td>
+                    <td class="p-3 border-b">$90</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- ملخص الفاتورة -->
+            <div class="flex flex-col sm:flex-row justify-end mt-6">
+              <div class="w-full sm:w-1/3 bg-gray-50 p-4 rounded-lg">
+                <div class="flex justify-between mb-2">
+                  <span>Subtotal:</span>
+                  <span>$265</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                  <span>Tax (10%):</span>
+                  <span>$26.50</span>
+                </div>
+                <div class="flex justify-between font-bold text-lg border-t border-gray-200 pt-2">
+                  <span>Total:</span>
+                  <span>$291.50</span>
+                </div>
+              </div>
+            </div>
+            <!-- أزرار -->
+            <div class="mt-6 flex flex-wrap gap-3">
+              <button class="px-5 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Download PDF</button>
+              <button class="px-5 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">Mark as Paid</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="users" class="tab-content hidden">
+        <h1 class="text-2xl font-bold mb-4">Users</h1>
+        <button id="addUserBtn" class="mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">Add New User</button>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-gray-200">
+            <thead>
+              <tr class="bg-gray-100">
+                <th class="p-3 border">ID</th>
+                <th class="p-3 border">Name</th>
+                <th class="p-3 border">Email</th>
+                <th class="p-3 border">Role</th>
+                <th class="p-3 border">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- سيتم ملئه بالـ JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <script>
+        // بيانات المستخدمين الأولية
+        let users = [
+          { id: 1, name: "Mariam El-Safty", email: "mariam@example.com", role: "Admin" },
+          { id: 2, name: "Ali Hassan", email: "ali@example.com", role: "User" },
+          { id: 3, name: "Sara Mohamed", email: "sara@example.com", role: "Moderator" }
+        ];
+      
+        // دالة عرض المستخدمين
+        function renderUsers() {
+          const tbody = document.querySelector("#users tbody");
+          tbody.innerHTML = ""; // مسح القديم
+        
+          users.forEach(user => {
+            const tr = document.createElement("tr");
+            tr.className = "hover:bg-gray-50 transition";
+          
+            tr.innerHTML = `
+              <td class="p-3 border">${user.id}</td>
+              <td class="p-3 border">${user.name}</td>
+              <td class="p-3 border">${user.email}</td>
+              <td class="p-3 border">${user.role}</td>
+              <td class="p-3 border flex gap-2">
+                <button class="edit-btn px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition" data-id="${user.id}">Edit</button>
+                <button class="delete-btn px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition" data-id="${user.id}">Delete</button>
+              </td>
+            `;
+            tbody.appendChild(tr);
+          });
+        
+          // ربط أزرار Edit و Delete بعد كل render
+          document.querySelectorAll(".delete-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+              const id = parseInt(btn.dataset.id);
+              users = users.filter(u => u.id !== id);
+              renderUsers();
+            });
+          });
+        
+          document.querySelectorAll(".edit-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+              const id = parseInt(btn.dataset.id);
+              const user = users.find(u => u.id === id);
+            
+              const newName = prompt("Edit Name:", user.name);
+              const newEmail = prompt("Edit Email:", user.email);
+              const newRole = prompt("Edit Role:", user.role);
+            
+              if (newName && newEmail && newRole) {
+                user.name = newName;
+                user.email = newEmail;
+                user.role = newRole;
+                renderUsers();
+              }
+            });
+          });
+        }
+      
+        // زر إضافة مستخدم جديد
+        const addUserBtn = document.getElementById("addUserBtn");
+        addUserBtn.addEventListener("click", () => {
+          const name = prompt("Enter Name:");
+          const email = prompt("Enter Email:");
+          const role = prompt("Enter Role:");
+        
+          if(name && email && role){
+            const newId = users.length ? users[users.length-1].id + 1 : 1;
+            users.push({ id: newId, name, email, role });
+            renderUsers();
+          }
+        });
+      
+        // عرض المستخدمين عند تحميل الصفحة
+        renderUsers();
+      </script>
+      <div id="inbox" class="tab-content hidden">
+        <h1 class="text-2xl font-bold mb-4">Inbox</h1>
+        <button id="addMsgBtn" class="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Add New Message</button>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-gray-200">
+            <thead>
+              <tr class="bg-gray-100">
+                <th class="p-3 border">ID</th>
+                <th class="p-3 border">Sender</th>
+                <th class="p-3 border">Subject</th>
+                <th class="p-3 border">Message</th>
+                <th class="p-3 border">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- سيتم ملئه بالـ JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <script>
+      // بيانات الرسائل الأولية
+      let messages = [
+        { id: 1, sender: "Ali Hassan", subject: "Order Update", message: "Your order #123 has been shipped." },
+        { id: 2, sender: "Mariam El-Safty", subject: "Welcome", message: "Thanks for joining our platform!" }
+      ];
+    
+      // دالة عرض الرسائل
+      function renderMessages() {
+        const tbody = document.querySelector("#inbox tbody");
+        tbody.innerHTML = "";
+      
+        messages.forEach(msg => {
+          const tr = document.createElement("tr");
+          tr.className = "hover:bg-gray-50 transition";
+        
+          tr.innerHTML = `
+            <td class="p-3 border">${msg.id}</td>
+            <td class="p-3 border">${msg.sender}</td>
+            <td class="p-3 border">${msg.subject}</td>
+            <td class="p-3 border">${msg.message}</td>
+            <td class="p-3 border flex gap-2">
+              <button class="delete-msg-btn px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition" data-id="${msg.id}">Delete</button>
+            </td>
+          `;
+          
+          tbody.appendChild(tr);
+        });
+      
+        // ربط أزرار الحذف
+        document.querySelectorAll(".delete-msg-btn").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const id = parseInt(btn.dataset.id);
+            messages = messages.filter(m => m.id !== id);
+            renderMessages();
+          });
+        });
+      }
+    
+      // زر إضافة رسالة جديدة
+      const addMsgBtn = document.getElementById("addMsgBtn");
+      addMsgBtn.addEventListener("click", () => {
+        const sender = prompt("Sender:");
+        const subject = prompt("Subject:");
+        const message = prompt("Message:");
+      
+        if(sender && subject && message){
+          const newId = messages.length ? messages[messages.length-1].id + 1 : 1;
+          messages.push({ id: newId, sender, subject, message });
+          renderMessages();
+        }
+      });
+      // عرض الرسائل عند تحميل الصفحة
+      renderMessages();
+    </script>
+      <div id="signin" class="tab-content hidden">
+        <h1 class="text-3xl font-bold mb-4">Sign In</h1>
+        <form class="max-w-sm mx-auto">
+          <div class="mb-5">
+            <label for="email" class="block mb-2.5 text-sm font-medium text-heading">Your email</label>
+            <input type="email" id="email" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="name@flowbite.com" required />
+          </div>
+          <div class="mb-5">
+            <label for="password" class="block mb-2.5 text-sm font-medium text-heading">Your password</label>
+            <input type="password" id="password" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="••••••••" required />
+          </div>
+          <label for="remember" class="flex items-center mb-5">
+            <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft" required />
+            <p class="ms-2 text-sm font-medium text-heading select-none">I agree with the <a href="#" class="text-fg-brand hover:underline">terms and conditions</a>.</p>
+          </label>
+          <button type="submit" id="submit" class="text-white bg-blue-500 rounded-3xl box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Submit</button>
+        </form>
+      </div>
+
+      <div id="support" class="tab-content hidden">
+        <h1 class="text-3xl font-bold mb-4">Support</h1>
+        <p class="text-gray-700">هنا محتوى الـ Support. أضف أسئلة شائعة أو وسائل التواصل مع الدعم الفني.</p>
+      </div>
+    </div>
+    <script>
+      const sidebarToggle = document.getElementById('sidebarToggle');
+      const sidebar = document.getElementById('sidebar');
+
+      sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('-translate-x-full');
+      });
+
+      // Dropdown للـ E-commerce
+      const ecomBtn = document.getElementById('ecomBtn');
+      const dropdownMenu = document.getElementById('dropdownMenu');
+      const dropdownIcon = document.getElementById('dropdownIcon');
+
+      ecomBtn.addEventListener('click', () => {
+        dropdownMenu.classList.toggle('hidden');
+        dropdownIcon.classList.toggle('rotate-180');
+      });
+
+      // Tabs switching
+      const tabs = document.querySelectorAll('#sidebar [data-tab]');
+      const contents = document.querySelectorAll('.tab-content');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', e => {
+          e.preventDefault();
+
+          const target = tab.dataset.tab;
+
+          // اخفي كل المحتوى
+          contents.forEach(c => c.classList.add('hidden'));
+
+          // أظهر المحتوى المستهدف
+          const content = document.getElementById(target);
+          if(content) content.classList.remove('hidden');
+
+          // لو على الموبايل اقفل الـ sidebar بعد الاختيار
+          if(window.innerWidth < 640) {
+            sidebar.classList.add('-translate-x-full');
+          }
+        });
+      });
+       
+        
+    </script>
+
+</body>
+</html>
